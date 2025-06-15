@@ -1,24 +1,28 @@
 /* static/style.css */
 :root {
-    --bg-color: #f8f9fa;
+    --bg-color: #f0f2f5; /* A slightly darker background for more contrast */
     --card-bg: #ffffff;
-    --text-color: #212529;
+    --text-color: #1a1b25;
     --muted-text: #6c757d;
-    --border-color: #dee2e6;
-    --accent-color: #007bff;
-    --accent-hover: #0056b3;
-    --success-color: #28a745;
+    --border-color: #e9ecef;
+    --accent-color: #0d6efd;
+    --accent-hover: #0b5ed7;
+    --success-color: #198754;
     --warning-color: #ffc107;
     --danger-color: #dc3545;
     --font-family: 'Inter', sans-serif;
+    --border-radius-lg: 16px; /* A larger radius for the main container */
+    --border-radius-md: 12px;
+    --border-radius-sm: 8px;
+    --shadow: 0 8px 24px rgba(0, 0, 0, 0.1); /* A more pronounced shadow */
 }
 
 body {
     font-family: var(--font-family);
-    background-color: var(--bg-color);
+    background-color: var(--bg-color); /* This is the page background */
     color: var(--text-color);
     margin: 0;
-    padding: 2rem;
+    padding: 2rem; /* Provides space around the main column */
     display: flex;
     justify-content: center;
     align-items: flex-start;
@@ -28,6 +32,11 @@ body {
 .container {
     max-width: 800px;
     width: 100%;
+    background: var(--card-bg); /* Makes the column a white card */
+    border-radius: var(--border-radius-lg); /* Rounds the corners of the column */
+    box-shadow: var(--shadow); /* Lifts the column off the background */
+    padding: 2.5rem; /* Internal spacing */
+    margin: 2rem 0; /* Adds space above and below the column */
 }
 
 header { text-align: center; margin-bottom: 2.5rem; }
@@ -37,7 +46,17 @@ h3 { margin: 0 0 0.25rem 0; font-size: 1.1rem; font-weight: 500; }
 
 /* Chain Visualization Styles */
 .chain-visualization { display: flex; justify-content: space-around; align-items: center; margin-bottom: 2.5rem; }
-.approver { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; text-align: center; width: 180px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); position: relative; transition: all 0.3s ease; }
+.approver {
+    background: #f8f9fa; /* Use a light background to distinguish from the white container */
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-md);
+    padding: 1.5rem;
+    text-align: center;
+    width: 180px;
+    box-shadow: none; /* Removed individual shadow */
+    position: relative;
+    transition: all 0.3s ease;
+}
 .approver span { color: var(--muted-text); font-size: 0.9rem; }
 .arrow { font-size: 2.5rem; color: var(--muted-text); font-weight: bold; }
 .status-light { width: 12px; height: 12px; border-radius: 50%; background-color: var(--muted-text); position: absolute; top: 1rem; right: 1rem; transition: background-color 0.3s ease; }
@@ -50,12 +69,44 @@ h3 { margin: 0 0 0.25rem 0; font-size: 1.1rem; font-weight: 500; }
 .approver.rejected .status-light { background-color: var(--danger-color); }
 
 /* Form Styles */
-#expense-form { background: var(--card-bg); padding: 2rem; border-radius: 8px; border: 1px solid var(--border-color); display: flex; flex-direction: column; align-items: center; gap: 1rem; }
-.input-group { display: flex; align-items: center; border: 1px solid var(--border-color); border-radius: 6px; padding-left: 0.75rem; }
-.input-group:focus-within { border-color: var(--accent-color); box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25); }
+#expense-form {
+    background: transparent; /* Form now sits inside the container */
+    padding: 2rem 0 0 0;
+    border-radius: 0;
+    border: none;
+    border-top: 1px solid var(--border-color); /* Separates form from visualization */
+    box-shadow: none; /* Removed individual shadow */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 0;
+}
+.input-group {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ced4da;
+    border-radius: var(--border-radius-sm);
+    padding-left: 0.75rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.input-group:focus-within {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.25);
+}
 .input-group span { font-size: 1.2rem; color: var(--muted-text); }
 #expense-amount { border: none; padding: 0.75rem; font-size: 1.1rem; width: 200px; outline: none; background: transparent; }
-button[type="submit"] { background-color: var(--accent-color); color: white; font-size: 1rem; font-weight: 500; border: none; border-radius: 6px; padding: 0.75rem 1.5rem; cursor: pointer; transition: background-color 0.2s ease; }
+button[type="submit"] {
+    background-color: var(--accent-color);
+    color: white;
+    font-size: 1rem;
+    font-weight: 500;
+    border: none;
+    border-radius: var(--border-radius-sm);
+    padding: 0.85rem 1.75rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
 button[type="submit"]:hover { background-color: var(--accent-hover); }
 
 /* Log and Output Styles */
@@ -64,17 +115,18 @@ pre {
     color: #e9ecef;
     font-family: 'Courier New', Courier, monospace;
     padding: 1.5rem;
-    border-radius: 8px;
+    border-radius: var(--border-radius-md);
     white-space: pre-wrap;
     word-wrap: break-word;
     font-size: 0.95rem;
     line-height: 1.5;
+    border: 1px solid #343a40;
 }
 #final-output { min-height: 50px; }
 #detailed-log-output { min-height: 100px; }
 
 /* Accordion Styles */
-.accordion-container { margin-top: 2rem; }
+.accordion-container { margin-top: 2rem; border-radius: var(--border-radius-md); overflow: hidden; border: 1px solid var(--border-color);}
 .accordion-button {
     background-color: var(--card-bg);
     color: var(--text-color);
@@ -82,15 +134,14 @@ pre {
     padding: 1rem;
     width: 100%;
     border: none;
-    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
     text-align: left;
     outline: none;
     font-size: 1.1rem;
     font-weight: 500;
     transition: background-color 0.2s ease;
 }
-.accordion-container .accordion-button:first-of-type { border-top-left-radius: 8px; border-top-right-radius: 8px; }
-.accordion-container .accordion-panel:last-of-type { border-bottom-left-radius: 8px; border-bottom-right-radius: 8px; }
+.accordion-container .accordion-button:last-of-type { border-bottom: none; }
 .accordion-button:hover, .accordion-button.active { background-color: #e9ecef; }
 .accordion-button::after { content: '+'; font-size: 1.3rem; color: var(--muted-text); float: right; }
 .accordion-button.active::after { content: "−"; }
@@ -101,10 +152,8 @@ pre {
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.3s ease-out, padding 0.3s ease-out;
-    border-left: 1px solid var(--border-color);
-    border-right: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
 }
-.accordion-panel:last-of-type { border-bottom: 1px solid var(--border-color); }
 .accordion-panel p { margin-top: 1.5rem; }
 .accordion-panel ul { line-height: 1.6; }
 
